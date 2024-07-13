@@ -8,7 +8,7 @@ const TransactionDetail = () => {
   const [transaction, setTransaction] = useState({});
 
   useEffect(() => {
-    axios.get(`/api/transactions/${id}`)
+    axios.get(`/transactions/${id}`)
       .then(response => {
         setTransaction(response.data);
       })
@@ -18,7 +18,7 @@ const TransactionDetail = () => {
   }, [id]);
 
   const handleDelete = () => {
-    axios.delete(`/api/transactions/${id}`)
+    axios.delete(`/transactions/${id}`)
       .then(() => {
         history.push('/');
       })

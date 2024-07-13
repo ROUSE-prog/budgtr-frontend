@@ -6,7 +6,7 @@ const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/transactions')
+    axios.get('https://budgtr-backend-6176.onrender.com/transactions')
       .then(response => {
         setTransactions(response.data);
       })

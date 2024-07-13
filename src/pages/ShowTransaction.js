@@ -9,7 +9,7 @@ const ShowTransaction = () => {
   const [transaction, setTransaction] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/api/transactions/${id}`)
+    axios.get(`https://budgtr-backend-6176.onrender.com/transactions/${id}`)
       .then(response => {
         setTransaction(response.data);
       })
@@ -19,7 +19,7 @@ const ShowTransaction = () => {
   }, [id]);
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:5001/api/transactions/${id}`)
+    axios.delete(`https://budgtr-backend-6176.onrender.com/transactions/${id}`)
       .then(() => {
         navigate('/');
       })

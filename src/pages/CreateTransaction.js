@@ -9,7 +9,7 @@ const CreateTransaction = () => {
 
   const addTransaction = async (transaction) => {
     try {
-      const response = await fetch('https://budgtr-backend-6176.onrender.com/api/transactions', {
+      const response = await fetch('https://budgtr-backend-6176.onrender.com/transactions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

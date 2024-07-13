@@ -1,41 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { List, ListItem, ListItemText, Container, Typography } from '@mui/material';
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
-  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    axios.get('/api/transactions')
+    axios.get('http://localhost:5001/api/transactions')
       .then(response => {
         setTransactions(response.data);
-        calculateTotal(response.data);
       })
       .catch(error => {
         console.error('There was an error fetching the transactions!', error);
       });
   }, []);
 
-  const calculateTotal = (transactions) => {
-    const total = transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
-    setTotal(total);
-  };
-
   return (
-    <div>
-      <h2>All Transactions</h2>
-      <h3>Total: {total}</h3>
-      <ul>
+    <Container maxWidth="sm">
+      <Typography variant="h2" gutterBottom>
+        Transactions
+      </Typography>
+      <List>
         {transactions.map(transaction => (
-          <li key={transaction.id}>
-            <Link to={`/transactions/${transaction.id}`}>
-              {transaction.item_name} - {transaction.amount}
-            </Link>
-          </li>
+          <ListItem key={transaction._id}>
+            <ListItemText
+              primary={`${transaction.item_name} - $${transaction.amount}`}
+              secondary={`Date: ${transaction.date}, From: ${transaction.from}, Category: ${transaction.category}`}
+            />
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Container>
   );
 };
 

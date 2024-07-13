@@ -1,0 +1,28 @@
+.transaction-list-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    height: 200px; /* Adjust height as needed */
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .transaction-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .transaction-list li {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .transaction-list li:last-child {
+    border-bottom: none;
+  }
+  

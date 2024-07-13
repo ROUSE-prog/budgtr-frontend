@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { List, ListItem, ListItemText, Container, Typography } from '@mui/material';
+import React, { useEffect, useRef } from 'react';
+import './TransactionList.css';
 
-const TransactionList = () => {
-  const [transactions, setTransactions] = useState([]);
+const TransactionList = ({ transactions }) => {
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    axios.get('https://budgtr-backend-6176.onrender.com/transactions')
-      .then(response => {
-        setTransactions(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the transactions!', error);
-      });
-  }, []);
+    const container = containerRef.current;
+    if (container) {
+      const scrollHeight = container.scrollHeight;
+      container.scrollTop = scrollHeight;
+      const scrollInterval = setInterval(() => {
+        container.scrollTop += 1;
+        if (container.scrollTop >= scrollHeight - container.clientHeight) {
+          container.scrollTop = 0;
+        }
+      }, 50);
+      return () => clearInterval(scrollInterval);
+    }
+  }, [transactions]);
+
+  const recentTransactions = transactions.slice(-5);
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h2" gutterBottom>
-        Transactions
-      </Typography>
-      <List>
-        {transactions.map(transaction => (
-          <ListItem key={transaction._id}>
-            <ListItemText
-              primary={`${transaction.item_name} - $${transaction.amount}`}
-              secondary={`Date: ${transaction.date}, From: ${transaction.from}, Category: ${transaction.category}`}
-            />
-          </ListItem>
+    <div className="transaction-list-container" ref={containerRef}>
+      <ul className="transaction-list">
+        {recentTransactions.map((transaction) => (
+          <li key={transaction.id}>
+            {transaction.description} - {transaction.amount} - {transaction.date}
+          </li>
         ))}
-      </List>
-    </Container>
+      </ul>
+    </div>
   );
 };
 

@@ -16,9 +16,14 @@ const CreateTransaction = () => {
         },
         body: JSON.stringify(transaction),
       });
+
       if (!response.ok) {
         throw new Error('Failed to create transaction');
       }
+
+      const data = await response.json();
+      console.log('Transaction created:', data); // Add this line
+
       // Handle success (e.g., redirect to home page or show success message)
       navigate('/');
     } catch (error) {

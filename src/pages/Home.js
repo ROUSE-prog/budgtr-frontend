@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch('https://budgtr-backend-6176.onrender.com/api/transactions');
+        const response = await fetch('https://budgtr-backend-6176.onrender.com/transactions');
         const data = await response.json();
         setTransactions(data);
       } catch (error) {

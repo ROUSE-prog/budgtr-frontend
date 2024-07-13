@@ -4,9 +4,11 @@ import './TransactionForm.css'; // Add a CSS file for styling
 
 const TransactionForm = ({ onSubmit }) => {
   const [transaction, setTransaction] = useState({
-    description: '',
+    item_name: '',
     amount: '',
     date: '',
+    from: '',
+    category: '',
   });
 
   const handleChange = (e) => {
@@ -17,17 +19,23 @@ const TransactionForm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(transaction);
-    setTransaction({ description: '', amount: '', date: '' });
+    setTransaction({
+      item_name: '',
+      amount: '',
+      date: '',
+      from: '',
+      category: '',
+    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        name="description"
-        value={transaction.description}
+        name="item_name"
+        value={transaction.item_name}
         onChange={handleChange}
-        placeholder="Description"
+        placeholder="Item Name"
         required
       />
       <input
@@ -43,6 +51,22 @@ const TransactionForm = ({ onSubmit }) => {
         name="date"
         value={transaction.date}
         onChange={handleChange}
+        required
+      />
+      <input
+        type="text"
+        name="from"
+        value={transaction.from}
+        onChange={handleChange}
+        placeholder="From"
+        required
+      />
+      <input
+        type="text"
+        name="category"
+        value={transaction.category}
+        onChange={handleChange}
+        placeholder="Category"
         required
       />
       <button type="submit">Add Transaction</button>
